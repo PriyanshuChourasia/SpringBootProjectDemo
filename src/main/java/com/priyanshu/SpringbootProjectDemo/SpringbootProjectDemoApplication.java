@@ -1,7 +1,6 @@
 package com.priyanshu.SpringbootProjectDemo;
 
-import com.priyanshu.SpringbootProjectDemo.services.ColourPrinter;
-import com.priyanshu.SpringbootProjectDemo.services.impl.ColourPrinterImpl;
+import com.priyanshu.SpringbootProjectDemo.config.PizzaConfig;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,13 +9,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringbootProjectDemoApplication implements CommandLineRunner {
 
-	private static final org.slf4j.Logger log = LoggerFactory.getLogger(SpringbootProjectDemoApplication.class);
+	private PizzaConfig pizzaConfig;
 
-	private ColourPrinter colourPrinter;
-
-	public SpringbootProjectDemoApplication(ColourPrinter colourPrinter){
-		this.colourPrinter = colourPrinter;
+	public SpringbootProjectDemoApplication(PizzaConfig pizzaConfig){
+		this.pizzaConfig = pizzaConfig;
 	}
+	private static final org.slf4j.Logger log = LoggerFactory.getLogger(SpringbootProjectDemoApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootProjectDemoApplication.class, args);
@@ -24,8 +22,7 @@ public class SpringbootProjectDemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(final String... args){
-		log.info(colourPrinter.print());
-
+		log.info("I want a {} crust pizza, with {} and {} sauce",pizzaConfig.getCrust(), pizzaConfig.getTopping(), pizzaConfig.getSauce());
 	}
 
 }
